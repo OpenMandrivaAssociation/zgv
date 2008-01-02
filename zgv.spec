@@ -10,6 +10,7 @@ Source0:       %{name}-%{version}.tar.bz2
 Patch1:        zgv-5.6.rgb-path.patch
 License:       GPL
 Group:         Graphics
+BuildRoot:     %{_tmppath}/%{name}-buildroot
 Prefix:        %{_prefix}
 BuildRequires: svgalib-devel
 
