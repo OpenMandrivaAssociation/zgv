@@ -12,7 +12,7 @@ License:       GPL
 Group:         Graphics
 BuildRoot:     %{_tmppath}/%{name}-buildroot
 Prefix:        %{_prefix}
-BuildRequires: svgalib-devel jpeg-devel png-devel
+BuildRequires: svgalib-devel jpeg-devel png-devel tiff-devel
 
 %description
 Zgv is a picture viewer for the linux console (svgalib), with a
