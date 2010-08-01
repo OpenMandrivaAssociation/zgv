@@ -1,6 +1,6 @@
 %define name zgv
 %define version 5.9
-%define release %mkrel 3
+%define release %mkrel 4
 
 Summary:       Console-based picture viewer for many graphics formats
 Name:          %{name}
@@ -38,12 +38,12 @@ probably want zgv.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 # Wow, this is an ugly hack. Thanks to the Conectiva packagers
 # for getting this to work at all....
 
-mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_infodir},%{_mandir}/man1}
+mkdir -p %{buildroot}/{%{_bindir},%{_infodir},%{_mandir}/man1}
 mv src/Makefile src/Makefile.old
 cat src/Makefile.old | sed -e "\
 s@ -o root -g root@@g" > src/Makefile
@@ -51,25 +51,22 @@ mv etc/bin.makefile etc/bin.makefile.old
 cat etc/bin.makefile.old | sed -e "\
 s@ -o root -g root@@g" > etc/bin.makefile
 
+# fix makefile
+sed -i 's,$(RM).*/usr/share/man/man1/zgv.1*.*/usr/share/info/zgv*,#&,' doc/Makefile
+
 %makeinstall \
-	BINDIR=$RPM_BUILD_ROOT/%{_bindir} \
-	INFODIR=$RPM_BUILD_ROOT/%{_infodir} \
-	MANDIR=$RPM_BUILD_ROOT/%{_mandir}/man1
+	BINDIR=%{buildroot}/%{_bindir} \
+	INFODIR=%{buildroot}/%{_infodir} \
+	MANDIR=%{buildroot}/%{_mandir}/man1
 chmod 644 doc/sample.zgvrc
-cd $RPM_BUILD_ROOT/%{_infodir}
+cd %{buildroot}/%{_infodir}
 mv zgv zgv.info
 for a in 1 2 3 4 ; do
 	mv zgv-$a zgv-$a.info
 done
 
 %clean
-rm -rf $RPM_BUILD_ROOT
-
-%post
-%install_info
-
-%preun
-%remove_info
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -77,4 +74,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.1.*
 %{_infodir}/%{name}*
 %{_bindir}/%{name}
-
