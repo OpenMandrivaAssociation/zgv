@@ -1,0 +1,13 @@
+Index: config.mk
+===================================================================
+--- config.mk
++++ config.mk	2006-08-04 02:18:54.000000000 +0200
+@@ -52,7 +52,7 @@
+ # colours will be recognised, which will mean many XPMs won't be
+ # readable. This setting should be ok.
+ #
+-RGB_DB=/usr/X11R6/lib/X11/rgb.txt
++RGB_DB=/usr/share/X11/rgb.txt
+ 
+ # Finally, an option for `make dvi' in the `doc' directory. You only need
+ # worry about what this is set to if you plan to make a printed manual.
