@@ -1,6 +1,6 @@
 %define name zgv
 %define version 5.9
-%define release %mkrel 4
+%define release 5
 
 Summary:       Console-based picture viewer for many graphics formats
 Name:          %{name}
